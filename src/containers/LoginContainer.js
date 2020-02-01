@@ -1,17 +1,14 @@
 import React from 'react';
-
+import LoginComponent from '../components/LoginComponent';
 
 
 const LoginContainer = props => {
 
-
-
     return(
         <div>
-            <p>Login</p>
+            <LoginComponent />
         </div>
     )
-
 }
 
 export default LoginContainer;
