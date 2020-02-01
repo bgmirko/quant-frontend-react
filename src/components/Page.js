@@ -5,7 +5,10 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
 import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
-import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, Inbox as InboxIcon, Mail as MailIcon, Menu as MenuIcon } from '@material-ui/icons';
+import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, Menu as MenuIcon } from '@material-ui/icons';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import PeopleIcon from '@material-ui/icons/People';
+
 
 const propTypes = {
     classes: PropTypes.object.isRequired,
@@ -142,33 +145,17 @@ const Page = (props) => {
                 </div>
                 <Divider />
                 <List>
-                    {[
-                        {
-                            name: "Login",
-                            value: "login"
-                        }
-                    ].map((menuItem, index) => (
-                        <ListItem button key={index} onClick={() => onMenuItemClick(menuItem.value)}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={menuItem.name} />
-                        </ListItem>
-                    ))}
+                    <ListItem button onClick={() => onMenuItemClick("login")}>
+                        <ListItemIcon><LockOpenIcon /></ListItemIcon>
+                        <ListItemText primary="Login" />
+                    </ListItem>
                 </List>
                 <Divider />
                 <List>
-                    {[
-                        {
-                            name: "Performers",
-                            value: "performers"
-                        }
-                    ].map((menuItem, index) => (
-                        <ListItem button key={index}
-                            onClick={() => onMenuItemClick(menuItem.value)}
-                        >
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={menuItem.name} />
-                        </ListItem>
-                    ))}
+                    <ListItem button onClick={() => onMenuItemClick("performers")}>
+                        <ListItemIcon><PeopleIcon /></ListItemIcon>
+                        <ListItemText primary="Performers" />
+                    </ListItem>
                 </List>
                 <Divider />
             </Drawer>
