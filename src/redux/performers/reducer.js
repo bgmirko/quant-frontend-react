@@ -14,7 +14,6 @@ const performersReducer = (state = initialState, action) => {
             };  
         case ActionTypes.GET_PERFORMERS_SUCCESS:
             const performers = action.payload.data.getPerformers.performers;
-            console.log(performers);
             return {
                 ...state,
                 performers: performers,

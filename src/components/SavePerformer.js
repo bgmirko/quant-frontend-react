@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
@@ -31,21 +31,42 @@ const styles = {
         marginBottom: 30
     },
     button: {
-        marginTop: 20
+        margin: '0 5px 0 0',
+        height: 28,
+        width: 70,
+        fontSize: 14
     }
 }
 
-const NewPerformer = props => {
+const SavePerformer = props => {
 
     const [state, setState] = useState({
         performer: {
+            _id: "",
             name: "",
             age: "",
             category: ""
-        }
+        },
+        mode: "save"
     })
 
-    const { classes } = props;
+    const { classes, performer } = props;
+
+    useEffect(() => { 
+        console.log("[Performer] component did mount");
+        if(performer !== undefined){
+            setState({
+                ...state,
+                performer: {
+                    _id: performer._id,
+                    name: performer.name,
+                    age: performer.age,
+                    category: performer.category
+                },
+                mode: "edit"
+            })
+        }
+     }, [])
 
     const handleInputChange = (e) => {
         setState({
@@ -72,13 +93,14 @@ const NewPerformer = props => {
             <Paper className={classes.paper}> 
             <form action="#"
                     className={classes.form} 
-                    onSubmit={(e) => { props.onPerformerDataSubmit(e, state.performer)} }>
+                    onSubmit={(e) => { props.onPerformerDataSubmit(e, state.performer, state.mode)} }>
                     <TextField
                         required
                         className={classes.inputFields}
                         id="outlined-required"
                         name="name"
                         label="Name"
+                        value={state.performer.name}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -87,6 +109,7 @@ const NewPerformer = props => {
                         id="outlined-required"
                         name="age"
                         label="Age"
+                        value={state.performer.age}
                         onChange={handleInputChange}
                     />
                     <FormControl className={classes.formControl}>
@@ -108,8 +131,17 @@ const NewPerformer = props => {
                         variant="contained" 
                         color="primary" 
                         disabled={state.performer.category === "" ? true : false}
-                        className={classes.submitButton}>
+                        className={classes.button}>
                             Save
+                    </Button>
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
+                        color="primary" 
+                        className={classes.button}
+                        onClick={() => props.changeViewHandle("listOfPerformers")}
+                        >
+                            Cancel
                     </Button>
                 </form>    
             </Paper>
@@ -117,4 +149,4 @@ const NewPerformer = props => {
     )
 }
 
-export default withStyles(styles)(NewPerformer);
+export default withStyles(styles)(SavePerformer);

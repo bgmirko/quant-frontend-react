@@ -17,7 +17,6 @@ function* getPerformers(action){
           }`
       };
       const result = yield call(Api.makePostRequest, graphqlQuery);
-      console.log(result);
       if(!result.data.hasOwnProperty('errors')){
         yield put(ActionTypes.getPerformersSuccess(result.data));
       }else{
@@ -30,7 +29,6 @@ function* getPerformers(action){
 
 function* addNewPerformer(action){
   try{
-      console.log(action)
       const graphqlQuery = {
         query: `
           mutation {
@@ -55,14 +53,36 @@ function* addNewPerformer(action){
 
 function* deletePerformer(action){
   try{
-      console.log(action)
       const graphqlQuery = {
         query: `
           mutation {
             deletePerformer(
               _id: "${action._id}", 
               )
-          {_id, name, age, category}
+        }`
+      };
+      const result = yield call(Api.makePostRequest, graphqlQuery);
+      if(!result.data.hasOwnProperty('errors')){
+       // yield put(ActionTypes.newPerformerSuccess(result.data));
+      }else{
+        throw new Error(result.data.errors[0].message);
+      }
+  }catch(error){
+    //  yield put(ActionTypes.newPerformerError(error));
+  }
+}
+
+function* editPerformer(action){
+  try{
+      const graphqlQuery = {
+        query: `
+          mutation {
+            editPerformer(
+              _id: "${action._id}", 
+              name: "${action.name}", 
+              age: "${action.age}", 
+              category: "${action.category}", 
+              )
         }`
       };
       const result = yield call(Api.makePostRequest, graphqlQuery);
@@ -81,4 +101,5 @@ export default function* authSaga() {
    yield takeEvery(ActionTypes.ADD_NEW_PERFORMER, addNewPerformer);
    yield takeEvery(ActionTypes.GET_PERFORMERS, getPerformers);
    yield takeEvery(ActionTypes.DELETE_PERFORMER, deletePerformer);
+   yield takeEvery(ActionTypes.EDIT_PERFORMER, editPerformer);
 }

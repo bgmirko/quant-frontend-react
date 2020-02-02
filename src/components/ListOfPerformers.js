@@ -12,10 +12,6 @@ const styles = {
 
 const ListOfPerformers = props => {
 
-    const [state, setState] = useState({
-
-    })
-
     const { classes, performers } = props;
 
     let listOfPerformers = [];
@@ -26,11 +22,10 @@ const ListOfPerformers = props => {
                 key={performer._id}
                 performer={performer}
                 deletePerformer={props.deletePerformer}
+                editPerformer={props.editPerformer}
             />)
         })     
     }   
-
-    console.log(listOfPerformers);
 
     return(
         <div className={classes.root}>

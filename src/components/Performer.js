@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
@@ -37,13 +37,7 @@ const styles = {
 
 const Performer = props => {
 
-    const [state, setState] = useState({
-
-    })
-
     const { classes, performer } = props;
-
-    console.log(performer)
 
     return(
         <div className={classes.root}>
@@ -63,7 +57,8 @@ const Performer = props => {
                 <Button 
                         variant="contained" 
                         color="primary" 
-                        className={classes.actionButton}>
+                        className={classes.actionButton}
+                        onClick={() => props.editPerformer(performer)}>
                             Edit
                 </Button>
                 <Button 

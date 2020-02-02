@@ -1,13 +1,15 @@
 //Action Types
-export const GET_PERFORMERS = 'auth/GET_PERFORMERS';
-export const GET_PERFORMERS_SUCCESS = 'auth/GET_PERFORMERS_SUCCESS';
-export const GET_PERFORMERS_ERROR = 'auth/GET_PERFORMERS_ERROR';
+export const GET_PERFORMERS = 'performer/GET_PERFORMERS';
+export const GET_PERFORMERS_SUCCESS = 'performer/GET_PERFORMERS_SUCCESS';
+export const GET_PERFORMERS_ERROR = 'performer/GET_PERFORMERS_ERROR';
 
-export const ADD_NEW_PERFORMER = 'auth/ADD_NEW_PERFORMER';
-export const NEW_PERFORMER_SUCCESS = 'auth/NEW_PERFORMER_SUCCESS';
-export const NEW_PERFORMER_ERROR = 'auth/NEW_PERFORMER_ERROR';
+export const ADD_NEW_PERFORMER = 'performer/ADD_NEW_PERFORMER';
+export const NEW_PERFORMER_SUCCESS = 'performer/NEW_PERFORMER_SUCCESS';
+export const NEW_PERFORMER_ERROR = 'performer/NEW_PERFORMER_ERROR';
 
-export const DELETE_PERFORMER = 'auth/DELETE_PERFORMER';
+export const DELETE_PERFORMER = 'performer/DELETE_PERFORMER';
+
+export const EDIT_PERFORMER = 'performer/EDIT_PERFORMER';
 
 
 
@@ -49,4 +51,10 @@ export const deletePerformer = (_id) => ({
     _id: _id
 });
 
-
+export const editPerformer = (_id, name, age, category) => ({
+    type: EDIT_PERFORMER,
+    _id: _id,
+    name: name,
+    age: age,
+    category: category
+});
