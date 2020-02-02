@@ -4,7 +4,6 @@ import Api from '../../api/calls';
 
 function* getUser(action){
   try{
-      console.log(action)
       const graphqlQuery = {
           query: `{getUser(email: "${action.email}", password: "${action.password}"){_id, name, email, userName}}`
       };
@@ -21,7 +20,6 @@ function* getUser(action){
 
 function* addNewUser(action){
   try{
-      console.log(action)
       const graphqlQuery = {
         query: `
           mutation {

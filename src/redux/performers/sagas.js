@@ -43,6 +43,7 @@ function* addNewPerformer(action){
       const result = yield call(Api.makePostRequest, graphqlQuery);
       if(!result.data.hasOwnProperty('errors')){
         yield put(ActionTypes.newPerformerSuccess(result.data));
+        yield put(ActionTypes.getPerformers());
       }else{
         throw new Error(result.data.errors[0].message);
       }
@@ -63,12 +64,12 @@ function* deletePerformer(action){
       };
       const result = yield call(Api.makePostRequest, graphqlQuery);
       if(!result.data.hasOwnProperty('errors')){
-       // yield put(ActionTypes.newPerformerSuccess(result.data));
+        yield put(ActionTypes.getPerformers());
       }else{
         throw new Error(result.data.errors[0].message);
       }
   }catch(error){
-    //  yield put(ActionTypes.newPerformerError(error));
+     console.log(error);
   }
 }
 
@@ -85,14 +86,10 @@ function* editPerformer(action){
               )
         }`
       };
-      const result = yield call(Api.makePostRequest, graphqlQuery);
-      if(!result.data.hasOwnProperty('errors')){
-       // yield put(ActionTypes.newPerformerSuccess(result.data));
-      }else{
-        throw new Error(result.data.errors[0].message);
-      }
+      yield call(Api.makePostRequest, graphqlQuery);
+      yield put(ActionTypes.getPerformers());
   }catch(error){
-    //  yield put(ActionTypes.newPerformerError(error));
+      console.log(error)
   }
 }
 
