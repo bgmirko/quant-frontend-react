@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
 import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
@@ -73,6 +75,11 @@ const styles = theme => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
         marginLeft: 0,
+    },
+    userLabel: {
+        width: 200,
+        paddingRight: 30,
+        textAlign: 'right'
     }
 });
 
@@ -128,6 +135,9 @@ const Page = (props) => {
                         Quantox
                     </Typography>
                 </Toolbar>
+                <Typography className={classes.userLabel} variant="body1" color="inherit" noWrap>
+                        {props.loggedUserName.charAt(0).toUpperCase() + props.loggedUserName.slice(1)}
+                </Typography>
             </AppBar>
             <Drawer
                 className={classes.drawer}
@@ -173,4 +183,12 @@ const Page = (props) => {
 
 Page.propTypes = propTypes;
 
-export default withRouter(withStyles(styles, { withTheme: true })(Page));
+const mapStateToProps = state => ({
+    loggedUserName: state.auth.user.name,
+});
+
+export default compose(
+    connect(mapStateToProps),
+    withRouter,
+    withStyles(styles, { withTheme: true })
+)(Page);

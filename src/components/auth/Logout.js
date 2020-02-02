@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, TextField, Typography, Button } from '@material-ui/core';
+import { Paper, Typography, Button } from '@material-ui/core';
 
 const styles = {
     root: {
@@ -23,7 +23,7 @@ const styles = {
     }
 }
 
-const LogoutComponent = props => {
+const Logout = props => {
 
     const { classes } = props;
     
@@ -44,4 +44,4 @@ const LogoutComponent = props => {
     )
 }
 
-export default withStyles(styles)(LogoutComponent);
+export default withStyles(styles)(Logout);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Button } from '@material-ui/core';
 
@@ -28,7 +28,7 @@ const styles = {
     }
 }
 
-const AuthComponent = props => {
+const Auth = props => {
 
 
 
@@ -37,7 +37,7 @@ const AuthComponent = props => {
     return(
         <div className={classes.root}>
             <Paper className={classes.paper}>     
-              <Typography variant="body1">Type Authentication</Typography>
+              <Typography variant="body1">Type of Authentication</Typography>
               <div className={classes.buttonContainer}>
                     <Button
                         className={classes.button}
@@ -61,4 +61,4 @@ const AuthComponent = props => {
     )
 }
 
-export default withStyles(styles)(AuthComponent);
+export default withStyles(styles)(Auth);

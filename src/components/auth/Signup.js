@@ -30,7 +30,7 @@ const styles = {
     }
 }
 
-const SignupComponent = props => {
+const Signup = props => {
 
     const [state, setState] = useState({
         email: "",
@@ -100,4 +100,4 @@ const SignupComponent = props => {
     )
 }
 
-export default withStyles(styles)(SignupComponent);
+export default withStyles(styles)(Signup);

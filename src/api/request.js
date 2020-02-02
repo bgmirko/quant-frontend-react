@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const makePostRequest = (graphqlQuery) => {
-    console.log("hihohoho")
     const options = {
         method: 'post',
         headers: {

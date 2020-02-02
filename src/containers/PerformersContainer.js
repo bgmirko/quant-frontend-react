@@ -29,7 +29,7 @@ const PerformersContainer = props => {
     useEffect(() => { 
         console.log("[PerformersContainer] component did mount");
         props.onGetPerformers();
-    }, [])
+    }, []);
 
     const handleSavePerformer = (e, {_id, name, age, category}, mode) => {
         e.preventDefault();
@@ -108,7 +108,11 @@ const PerformersContainer = props => {
 
     return(
         <div className={classes.container}>
-            {view}
+            {props.user !== "" ?
+                view
+                :
+                <p>You need to login to see data on this page</p>
+            }
         </div>
     )
 
@@ -116,6 +120,7 @@ const PerformersContainer = props => {
 
 const mapStateToProps = state => ({
     performers: state.performers.performers,
+    user: state.auth.user.name
 });
 
 const mapDispatchToProps = dispatch => ({

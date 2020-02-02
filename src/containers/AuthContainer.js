@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { getUser, logout, addNewUser } from '../redux/auth/actions'; 
-import LoginComponent from '../components/auth/LoginComponent';
-import AuthComponent from '../components/auth/AuthComponent';
-import LogoutComponent from '../components/auth/LogoutComponent';
-import SignupComponent from '../components/auth/SignupComponent';
+import Login from '../components/auth/Login';
+import Auth from '../components/auth/Auth';
+import Logout from '../components/auth/Logout';
+import Signup from '../components/auth/Signup';
 
 
 const AuthContainer = props => {
@@ -39,33 +39,31 @@ const AuthContainer = props => {
         props.onLogout();
     }
 
-    console.log(props.user);
-
     const getAuthOption = () => {
         if(props.user.name === "" && state.typeOfAuth === "signUp"){
-            console.log("usao")
             return (
-                <SignupComponent
+                <Signup
                      onSignupDataSubmit={handleNewUser}
                 />
             )
         }
         if(props.user.name !== ""){
             return (
-                <LogoutComponent
+                <Logout
                     logout={handleLogout}
                 />
             )
         }
         if(state.typeOfAuth){
             return (
-                <LoginComponent 
+                <Login 
                     onLoginDataSubmit={handleLogin}
+                    errorMessage={props.errorMessage}
                 />
             )
         }else{
             return (
-                <AuthComponent 
+                <Auth 
                     typeOfAuth={typeOfAuth}
                 />
             )
@@ -83,6 +81,7 @@ const AuthContainer = props => {
 
 const mapStateToProps = state => ({
     user: state.auth.user,
+    errorMessage: state.auth.errorMessage
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,7 +16,8 @@ const authReducer = (state = initialState, action) => {
         case ActionTypes.GET_USER:
             return {
                 ...state,
-                dataLoading: true
+                dataLoading: true,
+                errorMessage: ""
             };  
         case ActionTypes.GET_USER_SUCCESS:
             const user = action.payload.data.getUser;
@@ -28,7 +29,8 @@ const authReducer = (state = initialState, action) => {
                     name: user.name,
                     email: user.email
                 },
-                dataLoading: false
+                dataLoading: false,
+                errorMessage: ""
             };   
         case ActionTypes.GET_USER_ERROR:
             return {
@@ -50,7 +52,8 @@ const authReducer = (state = initialState, action) => {
                     userName: "",
                     name: "",
                     email: ""
-                }
+                },
+                errorMessage: ""
             };   
         case ActionTypes.ADD_NEW_USER:
             return {

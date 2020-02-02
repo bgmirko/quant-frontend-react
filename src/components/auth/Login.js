@@ -27,10 +27,14 @@ const styles = {
         width: 300,
         marginTop: 20,
         marginBottom: 30
+    },
+    errorMessage: {
+        color: "#ff0000",
+        textAlign: "center"
     }
 }
 
-const LoginComponent = props => {
+const Login = props => {
 
     const [state, setState] = useState({
         email: "",
@@ -76,10 +80,11 @@ const LoginComponent = props => {
                         className={classes.submitButton}>
                             Login
                     </Button>
+                    <Typography className={classes.errorMessage} variant="body1">{props.errorMessage}</Typography>
                 </form>            
             </Paper>
         </div>
     )
 }
 
-export default withStyles(styles)(LoginComponent);
+export default withStyles(styles)(Login);
