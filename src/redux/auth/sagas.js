@@ -18,7 +18,34 @@ function* getUser(action){
   }
 }
 
+function* addNewUser(action){
+  try{
+      console.log(action)
+      const graphqlQuery = {
+        query: `
+          mutation {
+            createUser(
+              email: "${action.email}", 
+              password: "${action.password}",
+              name: "${action.name}", 
+              userName: "${action.userName}",
+              )
+          {_id, name, email, userName}
+        }`
+      };
+      const result = yield call(Api.makePostRequest, graphqlQuery);
+      if(!result.data.hasOwnProperty('errors')){
+        yield put(ActionTypes.newUserSuccess(result.data));
+      }else{
+        throw new Error(result.data.errors[0].message);
+      }
+  }catch(error){
+      yield put(ActionTypes.newUserError(error));
+  }
+}
+
 
 export default function* authSaga() {
    yield takeEvery(ActionTypes.GET_USER, getUser);
+   yield takeEvery(ActionTypes.ADD_NEW_USER, addNewUser);
 }

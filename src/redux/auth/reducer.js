@@ -41,7 +41,46 @@ const authReducer = (state = initialState, action) => {
                 },
                 dataLoading: false,
                 errorMessage: action.payload.message
-            };    
+            };
+        case ActionTypes.LOGOUT:
+            return {
+                ...state,
+                user: {
+                    _id: null,
+                    userName: "",
+                    name: "",
+                    email: ""
+                }
+            };   
+        case ActionTypes.ADD_NEW_USER:
+            return {
+                ...state,
+                dataLoading: true
+            };   
+        case ActionTypes.NEW_USER_SUCCESS:
+            const newUser = action.payload.data.createUser;
+            return {
+                ...state,
+                user: {
+                    _id: newUser._id,
+                    userName: newUser.userName,
+                    name: newUser.name,
+                    email: newUser.email
+                },
+                dataLoading: false
+            };   
+        case ActionTypes.NEW_USER_ERROR:
+            return {
+                ...state,
+                user: {
+                    _id: null,
+                    userName: "",
+                    name: "",
+                    email: ""
+                },
+                dataLoading: false,
+                errorMessage: action.payload.message
+            };
         default:
             return { ...state };
     }

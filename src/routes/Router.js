@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
+import AuthPage from '../pages/AuthPage';
 import PerformersPage from '../pages/PerformersPage';
 
 
 const Router = () => (
     <Switch>
-        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/" component={AuthPage} />
         <Route exact path="/performers" component={PerformersPage} />
-        <Redirect to="/" component={LoginPage} />
+        <Redirect to="/" component={AuthPage} />
     </Switch>
 ); 
 
