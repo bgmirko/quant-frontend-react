@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, TextField, Typography, Button, FormControl, InputLabel } from '@material-ui/core';
+import { Paper, TextField, Typography, Button } from '@material-ui/core';
 
 const styles = {
     root: {
@@ -16,6 +16,9 @@ const styles = {
         padding: 40,
         marginTop: 50
     },
+    form: {
+        width: 300
+    },
     inputFields: {
         width: 300,
         marginBottom: 30
@@ -29,25 +32,51 @@ const styles = {
 
 const LoginComponent = props => {
 
+    const [state, setState] = useState({
+        email: "",
+        password: ""
+    })
+
     const { classes } = props;
+
+    const handleInputChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <div className={classes.root}>
             <Typography variant="h6">Login Page</Typography>
             <Paper className={classes.paper}> 
-                <TextField
-                    required
-                    className={classes.inputFields}
-                    id="outlined-required"
-                    label="Email"
-                />
-                <TextField
-                    required
-                    className={classes.inputFields}
-                    id="outlined-required"
-                    label="Password"
-                />
-                <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>Login</Button>
+                <form action="#"
+                    className={classes.form} 
+                    onSubmit={(e) => { props.onLoginDataSubmit(e, state.email, state.password)} }>
+                    <TextField
+                        required
+                        className={classes.inputFields}
+                        id="outlined-required"
+                        name="email"
+                        label="Email"
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        required
+                        className={classes.inputFields}
+                        id="outlined-required"
+                        name="password"
+                        label="Password"
+                        onChange={handleInputChange}
+                    />
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
+                        color="primary" 
+                        className={classes.submitButton}>
+                            Login
+                    </Button>
+                </form>            
             </Paper>
         </div>
     )
