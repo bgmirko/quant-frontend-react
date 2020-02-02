@@ -35,7 +35,7 @@ const styles = {
     }
 }
 
-const NewPerformerComponent = props => {
+const NewPerformer = props => {
 
     const [state, setState] = useState({
         performer: {
@@ -66,8 +66,6 @@ const NewPerformerComponent = props => {
             }
         });
     }
-    
-    console.log(state);
 
     return(
         <div className={classes.root}>
@@ -119,4 +117,4 @@ const NewPerformerComponent = props => {
     )
 }
 
-export default withStyles(styles)(NewPerformerComponent);
+export default withStyles(styles)(NewPerformer);
